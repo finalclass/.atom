@@ -1,7 +1,5 @@
 '.platform-darwin atom-text-editor:not([mini])':
   'ctrl-d': 'atom-commander:reveal-current-file'
-  'ctrl-up': 'cursor:move-up-fast'
-  'ctrl-down': 'cursor:move-down-fast'
   'ctrl-q': 'editor:auto-indent'
   'ctrl-e': 'editor:move-to-end-of-screen-line'
   'cmd-right': 'pane:show-next-item'

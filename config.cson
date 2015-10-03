@@ -10,3 +10,5 @@
     zoomFontWhenCtrlScrolling: true
     fontSize: 17
   "atom-alignment": {}
+  "instant-build":
+    buildOnSave: false

@@ -1,0 +1,39 @@
+{
+  "name": "mac-fix-path",
+  "main": "./lib/mac-fix-path",
+  "version": "0.0.0",
+  "description": "fix $PATH variable when running Atom from launcher",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atom/mac-fix-path.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {},
+  "readme": "# mac-fix-path package\n\nA short description of your package.\n\n![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/atom/mac-fix-path/issues"
+  },
+  "homepage": "https://github.com/atom/mac-fix-path#readme",
+  "_id": "mac-fix-path@0.0.0",
+  "_shasum": "cc211acaae3a822744b63c0bac110807489cdb3d",
+  "_resolved": "file:../d-11593-15432-zfrqv5/package.tgz",
+  "_from": "../d-11593-15432-zfrqv5/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".js": [
+        "lib/mac-fix-path.js"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
