@@ -42,8 +42,8 @@
   "homepage": "https://github.com/morassman/atom-commander#readme",
   "_id": "atom-commander@0.3.5",
   "_shasum": "245c2de004cb8d8bbfb7de4f0ca235626ca2e772",
-  "_resolved": "file:../d-11594-20532-1jex76o/package.tgz",
-  "_from": "../d-11594-20532-1jex76o/package.tgz",
+  "_resolved": "file:../d-11594-23184-1m3qjz7/package.tgz",
+  "_from": "../d-11594-23184-1m3qjz7/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [

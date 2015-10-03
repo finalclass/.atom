@@ -1,0 +1,1 @@
+{"context-menu":{"atom-text-editor":[{"label":"Toggle bootstrapper","command":"bootstrapper:toggle"}]},"menu":[{"label":"Packages","submenu":[{"label":"bootstrapper","submenu":[{"label":"Toggle","command":"bootstrapper:toggle"}]}]}]}
