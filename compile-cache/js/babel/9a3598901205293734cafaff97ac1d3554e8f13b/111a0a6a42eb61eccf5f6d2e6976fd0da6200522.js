@@ -1,0 +1,48 @@
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+/*global atom*/
+
+var _atom = require('atom');
+
+var _fs = require('fs');
+
+var fs = _interopRequireWildcard(_fs);
+
+'use babel';
+
+atom.commands.add('atom-text-editor', 'atom-commander:reveal-current-file', function () {
+    var editor = atom.workspace.getActiveTextEditor();
+    if (!editor) {
+        return;
+    }
+
+    var atomCommander = atom.packages.getActivePackage('atom-commander').mainModule;
+
+    atomCommander.bottomPanel.show();
+    atomCommander.mainView.refocusLastView();
+    atomCommander.actions.goFile(new _atom.File(editor.getPath()));
+});
+
+atom.commands.add('.atom-commander-container-view', 'atom-commander:open-highlighted-item-and-hide', function (event) {
+    var atomCommander = atom.packages.getActivePackage('atom-commander').mainModule;
+    var view = atomCommander.actions.getFocusedView();
+    if (view === null) {
+        return;
+    }
+
+    var item = view.getHighlightedItem();
+
+    atom.commands.dispatch(event.target, 'atom-commander:open-highlighted-item');
+
+    if (fs.lstatSync(item.getPath()).isFile()) {
+        atom.commands.dispatch(event.target, 'atom-commander:toggle-visible');
+    }
+});
+
+atom.commands.add('body', 'atom-commander:go-project-and-show-commander', function (event) {
+    var atomCommander = atom.packages.getActivePackage('atom-commander').mainModule;
+    atomCommander.bottomPanel.show();
+    atom.commands.dispatch(event.target, 'atom-commander:go-project');
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zenltb24vLmF0b20vbGliL2F0b20tY29tbWFuZGVyLWVuaGFuY2VtZW50cy5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O29CQUdtQixNQUFNOztrQkFDTCxJQUFJOztJQUFaLEVBQUU7O0FBSmQsV0FBVyxDQUFDOztBQU1aLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLGtCQUFrQixFQUFFLG9DQUFvQyxFQUFFLFlBQU07QUFDaEYsUUFBSSxNQUFNLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxtQkFBbUIsRUFBRSxDQUFDO0FBQ2xELFFBQUksQ0FBQyxNQUFNLEVBQUU7QUFBQyxlQUFPO0tBQUM7O0FBRXRCLFFBQUksYUFBYSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxVQUFVLENBQUM7O0FBRWhGLGlCQUFhLENBQUMsV0FBVyxDQUFDLElBQUksRUFBRSxDQUFDO0FBQ2pDLGlCQUFhLENBQUMsUUFBUSxDQUFDLGVBQWUsRUFBRSxDQUFDO0FBQ3pDLGlCQUFhLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxlQUFTLE1BQU0sQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLENBQUM7Q0FDMUQsQ0FBQyxDQUFDOztBQUVILElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLGdDQUFnQyxFQUFFLCtDQUErQyxFQUFFLFVBQUMsS0FBSyxFQUFLO0FBQzlHLFFBQUksYUFBYSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxVQUFVLENBQUM7QUFDaEYsUUFBSSxJQUFJLEdBQUcsYUFBYSxDQUFDLE9BQU8sQ0FBQyxjQUFjLEVBQUUsQ0FBQztBQUNsRCxRQUFJLElBQUksS0FBSyxJQUFJLEVBQUU7QUFDZixlQUFPO0tBQ1Y7O0FBRUQsUUFBSSxJQUFJLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixFQUFFLENBQUM7O0FBRXJDLFFBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxNQUFNLEVBQUUsc0NBQXNDLENBQUMsQ0FBQzs7QUFFN0UsUUFBSSxFQUFFLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLE1BQU0sRUFBRSxFQUFFO0FBQ3ZDLFlBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxNQUFNLEVBQUUsK0JBQStCLENBQUMsQ0FBQztLQUN6RTtDQUNGLENBQUMsQ0FBQzs7QUFFSCxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxNQUFNLEVBQUUsOENBQThDLEVBQUUsVUFBQyxLQUFLLEVBQUs7QUFDakYsUUFBSSxhQUFhLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDLFVBQVUsQ0FBQztBQUNoRixpQkFBYSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEVBQUUsQ0FBQztBQUNqQyxRQUFJLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsTUFBTSxFQUFFLDJCQUEyQixDQUFDLENBQUM7Q0FDckUsQ0FBQyxDQUFDIiwiZmlsZSI6Ii9Vc2Vycy9zenltb24vLmF0b20vbGliL2F0b20tY29tbWFuZGVyLWVuaGFuY2VtZW50cy5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2UgYmFiZWwnO1xuLypnbG9iYWwgYXRvbSovXG5cbmltcG9ydCB7RmlsZX0gZnJvbSAnYXRvbSc7XG5pbXBvcnQgKiBhcyBmcyBmcm9tICdmcyc7XG5cbmF0b20uY29tbWFuZHMuYWRkKCdhdG9tLXRleHQtZWRpdG9yJywgJ2F0b20tY29tbWFuZGVyOnJldmVhbC1jdXJyZW50LWZpbGUnLCAoKSA9PiB7XG4gIHZhciBlZGl0b3IgPSBhdG9tLndvcmtzcGFjZS5nZXRBY3RpdmVUZXh0RWRpdG9yKCk7XG4gIGlmICghZWRpdG9yKSB7cmV0dXJuO31cblxuICB2YXIgYXRvbUNvbW1hbmRlciA9IGF0b20ucGFja2FnZXMuZ2V0QWN0aXZlUGFja2FnZSgnYXRvbS1jb21tYW5kZXInKS5tYWluTW9kdWxlO1xuXG4gIGF0b21Db21tYW5kZXIuYm90dG9tUGFuZWwuc2hvdygpO1xuICBhdG9tQ29tbWFuZGVyLm1haW5WaWV3LnJlZm9jdXNMYXN0VmlldygpO1xuICBhdG9tQ29tbWFuZGVyLmFjdGlvbnMuZ29GaWxlKG5ldyBGaWxlKGVkaXRvci5nZXRQYXRoKCkpKTtcbn0pO1xuXG5hdG9tLmNvbW1hbmRzLmFkZCgnLmF0b20tY29tbWFuZGVyLWNvbnRhaW5lci12aWV3JywgJ2F0b20tY29tbWFuZGVyOm9wZW4taGlnaGxpZ2h0ZWQtaXRlbS1hbmQtaGlkZScsIChldmVudCkgPT4ge1xuICB2YXIgYXRvbUNvbW1hbmRlciA9IGF0b20ucGFja2FnZXMuZ2V0QWN0aXZlUGFja2FnZSgnYXRvbS1jb21tYW5kZXInKS5tYWluTW9kdWxlO1xuICB2YXIgdmlldyA9IGF0b21Db21tYW5kZXIuYWN0aW9ucy5nZXRGb2N1c2VkVmlldygpO1xuICBpZiAodmlldyA9PT0gbnVsbCkge1xuICAgICAgcmV0dXJuO1xuICB9XG5cbiAgdmFyIGl0ZW0gPSB2aWV3LmdldEhpZ2hsaWdodGVkSXRlbSgpO1xuXG4gIGF0b20uY29tbWFuZHMuZGlzcGF0Y2goZXZlbnQudGFyZ2V0LCAnYXRvbS1jb21tYW5kZXI6b3Blbi1oaWdobGlnaHRlZC1pdGVtJyk7XG5cbiAgaWYgKGZzLmxzdGF0U3luYyhpdGVtLmdldFBhdGgoKSkuaXNGaWxlKCkpIHtcbiAgICAgIGF0b20uY29tbWFuZHMuZGlzcGF0Y2goZXZlbnQudGFyZ2V0LCAnYXRvbS1jb21tYW5kZXI6dG9nZ2xlLXZpc2libGUnKTtcbiAgfVxufSk7XG5cbmF0b20uY29tbWFuZHMuYWRkKCdib2R5JywgJ2F0b20tY29tbWFuZGVyOmdvLXByb2plY3QtYW5kLXNob3ctY29tbWFuZGVyJywgKGV2ZW50KSA9PiB7XG4gICAgdmFyIGF0b21Db21tYW5kZXIgPSBhdG9tLnBhY2thZ2VzLmdldEFjdGl2ZVBhY2thZ2UoJ2F0b20tY29tbWFuZGVyJykubWFpbk1vZHVsZTtcbiAgICBhdG9tQ29tbWFuZGVyLmJvdHRvbVBhbmVsLnNob3coKTtcbiAgICBhdG9tLmNvbW1hbmRzLmRpc3BhdGNoKGV2ZW50LnRhcmdldCwgJ2F0b20tY29tbWFuZGVyOmdvLXByb2plY3QnKTtcbn0pO1xuIl19
+//# sourceURL=/Users/szymon/.atom/lib/atom-commander-enhancements.js

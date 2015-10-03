@@ -1,0 +1,101 @@
+(function() {
+  var $, ELEMENT_HIDDEN_CLASS, ELEMENT_VISIBLE_CLASS, PROGRESS_CLASS, ROOT_CLASS, SPINNER_CLASS, STATUS_TEXT_CLASS, StatusBarView;
+
+  $ = require('atom-space-pen-views').$;
+
+  ROOT_CLASS = 'instant-build-status';
+
+  ELEMENT_VISIBLE_CLASS = 'bb-visible';
+
+  ELEMENT_HIDDEN_CLASS = 'bb-hidden';
+
+  SPINNER_CLASS = 'instant-build-spinner';
+
+  PROGRESS_CLASS = 'instant-build-progress-bar';
+
+  STATUS_TEXT_CLASS = 'instant-build-status-text';
+
+  module.exports = StatusBarView = (function() {
+    function StatusBarView(serializedState) {
+      this.element = $("<span class=\"" + ROOT_CLASS + " " + ELEMENT_HIDDEN_CLASS + "\">\n  <div class=\"" + PROGRESS_CLASS + "\"></div>\n  <div class=\"" + SPINNER_CLASS + "\" style=\"display:none\"></div>\n  <i class=\"icon\"></i>\n  <span class=\"" + STATUS_TEXT_CLASS + "\"></span>\n</span>");
+    }
+
+    StatusBarView.prototype.getComponent = function(className) {
+      return this.element.find("." + className);
+    };
+
+    StatusBarView.prototype.setStatus = function(status, message, _arg) {
+      var resetAfterTimeout;
+      resetAfterTimeout = _arg.resetAfterTimeout;
+      if (this._statusReset) {
+        clearTimeout(this._statusReset);
+      }
+      this.getComponent(STATUS_TEXT_CLASS).html(message);
+      this.element.attr('class', "" + ROOT_CLASS + " " + ELEMENT_VISIBLE_CLASS + " " + status);
+      if (resetAfterTimeout) {
+        return this._statusReset = setTimeout(((function(_this) {
+          return function() {
+            return _this.clearStatus();
+          };
+        })(this)), 2000);
+      }
+    };
+
+    StatusBarView.prototype.clearStatus = function() {
+      if (this._statusReset) {
+        clearTimeout(this._statusReset);
+      }
+      this._statusReset = null;
+      return this.element.removeClass(ELEMENT_VISIBLE_CLASS).addClass(ELEMENT_HIDDEN_CLASS);
+    };
+
+    StatusBarView.prototype.setSpinnerVisibility = function(state) {
+      if (state !== 'hide' && state !== 'show') {
+        return;
+      }
+      this.getComponent(SPINNER_CLASS)[state]();
+      if (state === 'hide') {
+        return this.getComponent(PROGRESS_CLASS).css({
+          transition: 'none',
+          width: 0,
+          opacity: 0
+        });
+      }
+    };
+
+    StatusBarView.prototype.animateProgressBar = function(duration) {
+      if (!duration) {
+        return;
+      }
+      return this.getComponent(PROGRESS_CLASS).css({
+        transition: "width " + duration + "ms ease",
+        width: 95,
+        opacity: 1
+      });
+    };
+
+    StatusBarView.prototype.setStatusIcon = function(iconName) {
+      return this.element.find('i').attr('class', "icon " + iconName);
+    };
+
+    StatusBarView.prototype.serialize = function() {
+      return {};
+    };
+
+    StatusBarView.prototype.destroy = function() {
+      return this.element.remove();
+    };
+
+    StatusBarView.prototype.getElement = function() {
+      return this.element;
+    };
+
+    return StatusBarView;
+
+  })();
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICIiLAogICJzb3VyY2VSb290IjogIiIsCiAgInNvdXJjZXMiOiBbCiAgICAiL1VzZXJzL3N6eW1vbi8uYXRvbS9wYWNrYWdlcy9pbnN0YW50LWJ1aWxkL2xpYi9zdGF0dXMtYmFyLXZpZXcuY29mZmVlIgogIF0sCiAgIm5hbWVzIjogW10sCiAgIm1hcHBpbmdzIjogIkFBQUE7QUFBQSxNQUFBLDJIQUFBOztBQUFBLEVBQUMsSUFBSyxPQUFBLENBQVEsc0JBQVIsRUFBTCxDQUFELENBQUE7O0FBQUEsRUFFQSxVQUFBLEdBQWEsc0JBRmIsQ0FBQTs7QUFBQSxFQUdBLHFCQUFBLEdBQXdCLFlBSHhCLENBQUE7O0FBQUEsRUFJQSxvQkFBQSxHQUF1QixXQUp2QixDQUFBOztBQUFBLEVBS0EsYUFBQSxHQUFnQix1QkFMaEIsQ0FBQTs7QUFBQSxFQU1BLGNBQUEsR0FBaUIsNEJBTmpCLENBQUE7O0FBQUEsRUFPQSxpQkFBQSxHQUFvQiwyQkFQcEIsQ0FBQTs7QUFBQSxFQVNBLE1BQU0sQ0FBQyxPQUFQLEdBQ007QUFDUyxJQUFBLHVCQUFDLGVBQUQsR0FBQTtBQUNYLE1BQUEsSUFBQyxDQUFBLE9BQUQsR0FBVyxDQUFBLENBQ2YsZ0JBQUEsR0FBZSxVQUFmLEdBQTBCLEdBQTFCLEdBQTZCLG9CQUE3QixHQUFrRCxzQkFBbEQsR0FDUSxjQURSLEdBQ3VCLDRCQUR2QixHQUVBLGFBRkEsR0FFYyw4RUFGZCxHQUdnQixpQkFIaEIsR0FJRyxxQkFMWSxDQUFYLENBRFc7SUFBQSxDQUFiOztBQUFBLDRCQVVBLFlBQUEsR0FBYyxTQUFDLFNBQUQsR0FBQTthQUNaLElBQUMsQ0FBQSxPQUFPLENBQUMsSUFBVCxDQUFlLEdBQUEsR0FBRyxTQUFsQixFQURZO0lBQUEsQ0FWZCxDQUFBOztBQUFBLDRCQWFBLFNBQUEsR0FBVyxTQUFDLE1BQUQsRUFBUyxPQUFULEVBQWtCLElBQWxCLEdBQUE7QUFDVCxVQUFBLGlCQUFBO0FBQUEsTUFENEIsb0JBQUQsS0FBQyxpQkFDNUIs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
+
+//# sourceURL=/Users/szymon/.atom/packages/instant-build/lib/status-bar-view.coffee

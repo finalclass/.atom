@@ -1,0 +1,27 @@
+require('./lib/atom-commander-enhancements');
+
+require('./lib/cursor-enhancements');
+
+var _libPackagesInstaller = require('./lib/PackagesInstaller');
+
+var _child_process = require('child_process');
+
+'use babel';
+
+var bootstrapper = atom.packages.getActivePackage('bootstrapper').mainModule;
+bootstrapper.bootstrap('./lib/boot');
+
+(0, _child_process.exec)("$SHELL --login -i -c 'echo $PATH'", function (error, stdout, stderr) {
+    process.env.PATH = stdout;
+    if (error !== null) {
+        console.log('exec error: ' + error);
+    }
+
+    var pkgInstaller = new _libPackagesInstaller.PackagesInstaller();
+
+    pkgInstaller.add;
+});
+
+pkgInstaller.install([]);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zenltb24vLmF0b20vaW5pdC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiUUFFZSxtQ0FBbUM7O1FBQ25DLDJCQUEyQjs7b0NBQ1YseUJBQXlCOzs2QkFDdEMsZUFBZTs7QUFMbEMsV0FBVyxDQUFDOztBQU9aLElBQUksWUFBWSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsY0FBYyxDQUFDLENBQUMsVUFBVSxDQUFDO0FBQzdFLFlBQVksQ0FBQyxTQUFTLENBQUMsWUFBWSxDQUFDLENBQUM7O0FBR3JDLHlCQUFLLG1DQUFtQyxFQUFFLFVBQVUsS0FBSyxFQUFFLE1BQU0sRUFBRSxNQUFNLEVBQUU7QUFDdkUsV0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLEdBQUcsTUFBTSxDQUFDO0FBQzFCLFFBQUksS0FBSyxLQUFLLElBQUksRUFBRTtBQUNoQixlQUFPLENBQUMsR0FBRyxDQUFDLGNBQWMsR0FBRyxLQUFLLENBQUMsQ0FBQztLQUN2Qzs7QUFFRCxRQUFJLFlBQVksR0FBRyw2Q0FBdUIsQ0FBQzs7QUFFM0MsZ0JBQVksQ0FBQyxHQUFHLENBQUE7Q0FDbkIsQ0FBQyxDQUFDOztBQUVILFlBQVksQ0FBQyxPQUFPLENBQUMsRUFFcEIsQ0FBQyxDQUFDIiwiZmlsZSI6Ii9Vc2Vycy9zenltb24vLmF0b20vaW5pdC5qcyIsInNvdXJjZXNDb250ZW50IjpbIid1c2UgYmFiZWwnO1xuXG5pbXBvcnQge30gZnJvbSAnLi9saWIvYXRvbS1jb21tYW5kZXItZW5oYW5jZW1lbnRzJztcbmltcG9ydCB7fSBmcm9tICcuL2xpYi9jdXJzb3ItZW5oYW5jZW1lbnRzJztcbmltcG9ydCB7UGFja2FnZXNJbnN0YWxsZXJ9IGZyb20gJy4vbGliL1BhY2thZ2VzSW5zdGFsbGVyJztcbmltcG9ydCB7ZXhlY30gZnJvbSAnY2hpbGRfcHJvY2Vzcyc7XG5cbnZhciBib290c3RyYXBwZXIgPSBhdG9tLnBhY2thZ2VzLmdldEFjdGl2ZVBhY2thZ2UoJ2Jvb3RzdHJhcHBlcicpLm1haW5Nb2R1bGU7XG5ib290c3RyYXBwZXIuYm9vdHN0cmFwKCcuL2xpYi9ib290Jyk7XG5cblxuZXhlYyhcIiRTSEVMTCAtLWxvZ2luIC1pIC1jICdlY2hvICRQQVRIJ1wiLCBmdW5jdGlvbiAoZXJyb3IsIHN0ZG91dCwgc3RkZXJyKSB7XG4gICAgcHJvY2Vzcy5lbnYuUEFUSCA9IHN0ZG91dDtcbiAgICBpZiAoZXJyb3IgIT09IG51bGwpIHtcbiAgICAgICAgY29uc29sZS5sb2coJ2V4ZWMgZXJyb3I6ICcgKyBlcnJvcik7XG4gICAgfVxuXG4gICAgdmFyIHBrZ0luc3RhbGxlciA9IG5ldyBQYWNrYWdlc0luc3RhbGxlcigpO1xuXG4gICAgcGtnSW5zdGFsbGVyLmFkZFxufSk7XG5cbnBrZ0luc3RhbGxlci5pbnN0YWxsKFtcblxuXSk7XG4iXX0=
+//# sourceURL=/Users/szymon/.atom/init.js
