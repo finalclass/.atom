@@ -1,0 +1,14 @@
+{
+  "name": "sel-atom-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "jshintConfig": {
+    "esnext": true,
+  },
+  "author": "",
+  "license": "ISC"
+}
